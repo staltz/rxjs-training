@@ -3,6 +3,8 @@ Hosted by [André Staltz](http://andre.staltz.com)
 
 ## Exercises
 
+Also available in the directories in this repository. Avoid looking at `solution` as much as you can. ;)
+
 ### 1. [Imperative array handling](http://jsbin.com/yawuqa/edit?js,console)
 
 ### 2. [Functional array handling](http://jsbin.com/tonunu/edit?js,console)
