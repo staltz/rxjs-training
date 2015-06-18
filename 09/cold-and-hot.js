@@ -1,6 +1,6 @@
 console.clear();
 
-var clock = Rx.Observable.interval(1000).take(10);
+var clock = Rx.Observable.interval(1000).take(10).map(x => x+1);
 
 setTimeout(() => {
   clock.subscribe(x => console.log(`     b: ${x}`))
