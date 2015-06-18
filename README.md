@@ -32,3 +32,7 @@ Also available in the directories in this repository. Avoid looking at `solution
 ### 12. [Cycle.js counter button](http://jsbin.com/bogabi/edit?js,output)
 
 ### 13. [Cycle.js Body Mass Index app](http://jsbin.com/woqito/edit?js,output)
+
+Alternative link:
+
+# http://git.io/vLO2o
