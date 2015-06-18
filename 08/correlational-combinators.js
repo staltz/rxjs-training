@@ -1,7 +1,7 @@
 console.clear();
 
 var connectionFailures = Rx.Observable.interval(800).take(2)
-  .map(i => ['Failed to connect', 'Failed to refresh'][i]);
+  .map(i => ['Connection pooped', 'Refresh Epic Fail'][i]);
 
 var renderFailures = Rx.Observable.interval(700).take(3)
   .map(i => ['Render failed: 309', 'Render failed: 17', 'Nothing rendered'][i]);
