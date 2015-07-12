@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Rxjs</title>
+    <style>
+      body {
+      margin: 0;
+      padding: 0;
+      }
+      nav {
+      text-align: left;
+      background-color: #4679bd;
+      height: 44px;
+      margin-bottom: 10px;
+      }
+      nav a {
+      padding: 0 5px;
+      display: inline-block;
+      line-height: 40px;
+      text-decoration: none;
+      color: white;
+      }
+      .logo {
+      width: 200px;
+      font-weight: bold;
+      font-size: 20px;
+      }
+      textarea {
+      overflow: auto;
+      margin: 0px;
+      height: 304px;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      resize: horizontal;
+      white-space: nowrap;
+      }
+      h3, h1 {
+      margin: 0;
+      }
+      .clearfix::before {
+      content: "";
+      display: block;
+      visibility: hidden;
+      clear: both;
+      }
+      .container {
+      width: 90vw;
+      height: 90vh;
+      margin: 0 auto;
+      }
+      .upperhalf{
+      height: 40%;
+      width: 100%;
+      display: table;
+      }
+      .cells {
+      display: table-cell;
+      width: 50%;
+      border: 1px solid #bbb;
+      position: relative;
+      }
+      .lowerhalf {
+      height: 60%;
+      width: 100%;
+      display: table;
+      }
+      .window-label {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      border: 1px solid #ddd;
+      color: #777;
+      padding: 0 5px;
+      display: inline-block;
+      z-index: 100;
+      opacity: 0.9;
+      }
+      #eval{
+      background-color: #fff;
+      width: 45px;
+      text-align: center;
+      color: #4679bd;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="clearfix">
+      <a class="logo">RxJs</a>
+      <a id="q"></a>
+      <a href="#" id="prev" data-pos="-1">Previous</a>
+      <a href="#" id="start" data-pos="0">Restart</a>
+      <a href="#" id="next" data-pos="1">Next</a>
+      <a href="#" id="eval">Run</a>
+    </nav>
+    <div class="container">
+
+      <div class="upperhalf">
+        <div class="cells">
+          <textarea class="question"></textarea>
+          <span class="window-label">Question</span>
+        </div>
+        <div class="cells">
+          <textarea class="solution"></textarea>
+          <span class="window-label" readonly>Result</span>
+        </div>
+      </div>
+
+      <div class="lowerhalf">
+        <div class="cells">
+          <textarea class="js"></textarea>
+          <span class="window-label">JavaScript</span>
+        </div>
+        <div class="cells">
+          <textarea class="html"></textarea>
+          <span class="window-label">HTML</span>
+        </div>
+      </div>
+    </div>
+
+    <script src="../rx.all.js"></script>
+    <script src="console.js"></script>
+    <script src="exercises.js"></script>
+    <script>
+      (function( factory ) {
+      var pos = pos || 0;
+      [].slice.call($$('.cells')).forEach(function(cell) {
+
+      (function( c ) {
+      c.onclick = function(e) {
+      console.log(e.target.nextElementSibling)
+      e.target.nextElementSibling.style.opacity = 0;
+      }
+      })(cell);
+      });
+
+      function move( v ) {
+      if(v === -1) {
+      pos -= 1;
+      } else if( v === 1) {
+      pos +=1;
+      return Math.min(pos, urls.length);
+      }
+      return Math.min(pos, 0);
+      }
+
+      function navigate( e ) {
+      e.preventDefault();
+      move(+e.target.dataset.pos);
+
+      var url = urls[ pos ];
+
+      factory( url );
+      $("#q").innerHTML = '<u>' + url.replace(/\.\w+/, '') + '</u>';
+      }
+
+      $('#next').onclick = navigate;
+      $('#prev').onclick = navigate;
+      $('#start').onclick = navigate;
+      })(function( url ) {
+      function handler() {
+        if(this.status < 400 && this.readyState === 4 )
+          $('.question').innerHTML = this.response
+      }
+      Console.xhr(url, { handler: handler });
+      })
+    </script>
+  </body>
+</html>
