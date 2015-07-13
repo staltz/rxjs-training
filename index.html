@@ -35,6 +35,10 @@
       box-sizing: border-box;
       resize: horizontal;
       white-space: nowrap;
+      border: 0;
+      }
+      .solution {
+      overflow: auto;
       }
       h3, h1 {
       margin: 0;
@@ -102,7 +106,7 @@
           <span class="window-label">Question</span>
         </div>
         <div class="cells">
-          <textarea class="solution"></textarea>
+          <div class="solution"></div>
           <span class="window-label" readonly>Result</span>
         </div>
       </div>
@@ -119,52 +123,11 @@
       </div>
     </div>
 
-    <script src="../rx.all.js"></script>
-    <script src="console.js"></script>
-    <script src="exercises.js"></script>
-    <script>
-      (function( factory ) {
-      var pos = pos || 0;
-      [].slice.call($$('.cells')).forEach(function(cell) {
-
-      (function( c ) {
-      c.onclick = function(e) {
-      console.log(e.target.nextElementSibling)
-      e.target.nextElementSibling.style.opacity = 0;
-      }
-      })(cell);
-      });
-
-      function move( v ) {
-      if(v === -1) {
-      pos -= 1;
-      } else if( v === 1) {
-      pos +=1;
-      return Math.min(pos, urls.length);
-      }
-      return Math.min(pos, 0);
-      }
-
-      function navigate( e ) {
-      e.preventDefault();
-      move(+e.target.dataset.pos);
-
-      var url = urls[ pos ];
-
-      factory( url );
-      $("#q").innerHTML = '<u>' + url.replace(/\.\w+/, '') + '</u>';
-      }
-
-      $('#next').onclick = navigate;
-      $('#prev').onclick = navigate;
-      $('#start').onclick = navigate;
-      })(function( url ) {
-      function handler() {
-        if(this.status < 400 && this.readyState === 4 )
-          $('.question').innerHTML = this.response
-      }
-      Console.xhr(url, { handler: handler });
-      })
-    </script>
+    <script src="lib/rx.all.js"></script>
+    <script src="lib/console.js"></script>
+    <script src="lib/utils.js"></script>
+    <script src="lib/storage.js"></script>
+    <script src="lib/exercises.js"></script>
+    <script src="lib/script.js"></script>
   </body>
 </html>
