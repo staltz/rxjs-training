@@ -24,5 +24,6 @@ var observable = Rx.Observable.create(function (observer) {
 var subscription = observable.subscribe(x => console.log('next: ' + x));
 
 setTimeout(() => {
-  subscription.dispose();
+  // RxJS 4: subscription.dispose();
+  subscription.unsubscribe();
 }, 500);
