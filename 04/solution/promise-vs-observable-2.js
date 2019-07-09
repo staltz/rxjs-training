@@ -17,6 +17,7 @@ var observable = Rx.Observable.create(function (observer) {
   }, 1000);
   console.log('observable started');
   return function onDispose() {
+    console.log("dispose")
     clearTimeout(x);
   };
 });
